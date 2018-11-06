@@ -6,6 +6,11 @@ spring:
     password: guest
     
 rabbitmq: 
-  queue:
-   msg: spring-boot-queue-msg
-   user: spring-boot-queue-user
+ topic:
+  exchange: exchange
+  message:
+   queue: springboot.topic.message
+   routingKey: springboot.topic.message
+  messages:
+    queue: springboot.topic.messages
+    routingKey: springboot.topic.#
