@@ -14,9 +14,15 @@
 	<artifactId>springboot-rabbitmq</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>springboot-rabbitmq</name>
 	<description>Demo project for Spring Boot</description>
+
+	<modules>
+		<module>callback</module>
+		<module>fanout</module>
+		<module>single</module>
+		<module>topic</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
