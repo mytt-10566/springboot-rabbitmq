@@ -1,0 +1,12 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    # 确认发送的消息已经被消费
+    publisher-confirms: true
+    
+rabbitmq: 
+  queue:
+   callback: springboot.queue.callback
