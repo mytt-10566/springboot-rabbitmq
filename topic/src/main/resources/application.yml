@@ -1,16 +1,16 @@
 spring:
   rabbitmq:
-    host: localhost
+    host: dev.tss.com
     port: 5672
-    username: guest
-    password: guest
+    username: admin
+    password: njittss
     
 rabbitmq: 
  topic:
-  exchange: exchange
+  exchangeName: topidExchange
   message:
-   queue: springboot.topic.message
-   routingKey: springboot.topic.message
+   queue: topic.queue.message
+   routingKey: topic.message
   messages:
-    queue: springboot.topic.messages
-    routingKey: springboot.topic.#
+    queue: topic.queue.messages
+    routingKey: topic.#

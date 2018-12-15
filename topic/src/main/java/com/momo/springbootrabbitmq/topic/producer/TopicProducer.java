@@ -12,26 +12,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class TopicProducer {
 
-    @Value("${rabbitmq.topic.message.queue}")
-    private String topicMessageQueue;
+    @Value("${rabbitmq.topic.message.routingKey}")
+    private String messageRoutingKey;
 
-    @Value("${rabbitmq.topic.messages.queue}")
-    private String topicMessagesQueue;
+    @Value("${rabbitmq.topic.messages.routingKey}")
+    private String messagesRoutingKey;
 
-    @Value("${rabbitmq.topic.exchange}")
-    private String topicExchange;
+    @Value("${rabbitmq.topic.exchangeName}")
+    private String exchangeName;
 
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
     public void send() {
-        // xx.topic.message、xx.topic.messages队列都可以收到消息
-        String msg1 = topicMessageQueue + " msg";
-        this.rabbitTemplate.convertAndSend(topicExchange, topicMessageQueue, msg1);
+        // topic.queue.message、topic.queue.messages队列都可以收到消息
+        String msg1 = "msg 1";
+        this.rabbitTemplate.convertAndSend(exchangeName, messageRoutingKey, msg1);
 
-        // xx.topic.messages队列可以收到消息
-        String msg2 = topicMessagesQueue + " msg";
-        this.rabbitTemplate.convertAndSend(topicExchange, topicMessagesQueue, msg2);
+        // 仅topic.queue.messages队列可以收到消息（topic.messages只与topic.#绑定键匹配）
+        String msg2 = "msg 2";
+        this.rabbitTemplate.convertAndSend(exchangeName, "topic.messages", msg2);
     }
 
 }

@@ -13,12 +13,12 @@ public class TopicConsumer {
 
     @RabbitListener(queues = "${rabbitmq.topic.message.queue}")
     public void receiveMsg(String msg) {
-        System.out.println("c1 - 接收到消息：" + msg);
+        System.out.println("c1 - " + msg);
     }
 
     @RabbitListener(queues = "${rabbitmq.topic.messages.queue}")
     public void receiveMsgs(String msg) {
-        System.out.println("c2 - 接收到消息：" + msg);
+        System.out.println("c2 - " + msg);
     }
     
 }

@@ -11,6 +11,4 @@ rabbitmq:
       a: fanout.queue.a
       b: fanout.queue.b
       c: fanout.queue.c
-      msg: spring-boot-queue-msg
-      user: spring-boot-queue-user
     exchangeName: fanoutExchange

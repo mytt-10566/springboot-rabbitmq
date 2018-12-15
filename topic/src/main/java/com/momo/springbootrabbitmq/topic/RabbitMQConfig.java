@@ -19,16 +19,16 @@ public class RabbitMQConfig {
     private String topicMessageQueue;
 
     @Value("${rabbitmq.topic.message.routingKey}")
-    private String topicMessageRoutingKey;
+    private String messageRoutingKey;
 
     @Value("${rabbitmq.topic.messages.queue}")
     private String topicMessagesQueue;
 
     @Value("${rabbitmq.topic.messages.routingKey}")
-    private String topicMessagesRoutingKey;
+    private String messagesRoutingKey;
 
-    @Value("${rabbitmq.topic.exchange}")
-    private String topicExchange;
+    @Value("${rabbitmq.topic.exchangeName}")
+    private String exchangeName;
 
     @Bean
     public Queue queueMessage() {
@@ -42,7 +42,7 @@ public class RabbitMQConfig {
 
     @Bean
     TopicExchange exchange() {
-        return new TopicExchange(topicExchange);
+        return new TopicExchange(exchangeName);
     }
 
     /**
@@ -54,7 +54,7 @@ public class RabbitMQConfig {
      */
     @Bean
     Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessage).to(exchange).with(topicMessagesQueue);
+        return BindingBuilder.bind(queueMessage).to(exchange).with(messageRoutingKey);
     }
 
     /**
@@ -66,6 +66,6 @@ public class RabbitMQConfig {
      */
     @Bean
     Binding bindingExchangeMessages(Queue queueMessages, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessages).to(exchange).with(topicMessagesRoutingKey);
+        return BindingBuilder.bind(queueMessages).to(exchange).with(messagesRoutingKey);
     }
 }
