@@ -2,6 +2,7 @@ package com.momo.springbootrabbitmq.fanout.producer;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class FanoutProducer {
 
+    @Value("${rabbitmq.fanout.exchangeName}")
+    private String exchangeName;
+
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
@@ -20,8 +24,8 @@ public class FanoutProducer {
      * 扇形交换器不匹配routingKey
      * */
     public void send() {
-        String msgString = "fanoutSender :hello i am fanout message";
+        String msgString = "FanoutSender: fanout message";
         System.out.println(msgString);
-        this.rabbitTemplate.convertAndSend("fanoutExchange", "abcd.ee", msgString);
+        this.rabbitTemplate.convertAndSend(exchangeName, "", msgString);
     }
 }

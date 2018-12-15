@@ -4,6 +4,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,24 +15,34 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
+    @Value("${rabbitmq.fanout.queue.a}")
+    private String aQueueName;
+    @Value("${rabbitmq.fanout.queue.b}")
+    private String bQueueName;
+    @Value("${rabbitmq.fanout.queue.c}")
+    private String cQueueName;
+
+    @Value("${rabbitmq.fanout.exchangeName}")
+    private String exchangeName;
+
     @Bean
     public Queue aQueue() {
-        return new Queue("fanout.a");
+        return new Queue(aQueueName);
     }
 
     @Bean
     public Queue bQueue() {
-        return new Queue("fanout.b");
+        return new Queue(bQueueName);
     }
 
     @Bean
     public Queue cQueue() {
-        return new Queue("fanout.c");
+        return new Queue(cQueueName);
     }
 
     @Bean
     FanoutExchange fanoutExchange() {
-        return new FanoutExchange("fanoutExchange");
+        return new FanoutExchange(exchangeName);
     }
 
     @Bean

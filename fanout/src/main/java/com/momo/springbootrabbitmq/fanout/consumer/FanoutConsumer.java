@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class FanoutConsumer {
     
-    @RabbitListener(queues = "fanout.a")
+    @RabbitListener(queues = "${rabbitmq.fanout.queue.a}")
     public void receiveFanoutA(String msg) {
         System.out.println("a - " + msg);
     }
 
-    @RabbitListener(queues = "fanout.b")
+    @RabbitListener(queues = "${rabbitmq.fanout.queue.b}")
     public void receiveFanoutB(String msg) {
         System.out.println("b - " + msg);
     }
 
-    @RabbitListener(queues = "fanout.c")
+    @RabbitListener(queues = "${rabbitmq.fanout.queue.c}")
     public void receiveFanoutC(String msg) {
         System.out.println("c - " + msg);
     }
