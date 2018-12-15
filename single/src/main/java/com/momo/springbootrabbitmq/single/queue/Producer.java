@@ -33,5 +33,4 @@ public class Producer {
     public void sendUser(User user) {
         rabbitTemplate.convertAndSend(userQueueName, user);
     }
-
 }

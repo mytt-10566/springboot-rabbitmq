@@ -15,17 +15,17 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
     @Bean
-    public Queue aMessage() {
+    public Queue aQueue() {
         return new Queue("fanout.a");
     }
 
     @Bean
-    public Queue bMessage() {
+    public Queue bQueue() {
         return new Queue("fanout.b");
     }
 
     @Bean
-    public Queue cMessage() {
+    public Queue cQueue() {
         return new Queue("fanout.c");
     }
 
@@ -35,17 +35,17 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    Binding bindingExchangeA(Queue aMessage, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(aMessage).to(fanoutExchange);
+    Binding bindingExchangeA(Queue aQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(aQueue).to(fanoutExchange);
     }
 
     @Bean
-    Binding bindingExchangeB(Queue bMessage, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(bMessage).to(fanoutExchange);
+    Binding bindingExchangeB(Queue bQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(bQueue).to(fanoutExchange);
     }
 
     @Bean
-    Binding bindingExchangeC(Queue cMessage, FanoutExchange fanoutExchange) {
-        return BindingBuilder.bind(cMessage).to(fanoutExchange);
+    Binding bindingExchangeC(Queue cQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(cQueue).to(fanoutExchange);
     }
 }

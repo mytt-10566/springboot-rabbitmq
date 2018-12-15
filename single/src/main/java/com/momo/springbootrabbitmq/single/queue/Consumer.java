@@ -25,5 +25,4 @@ public class Consumer {
     public void receiveUser(User user) {
         System.out.println("收到用户消息：" + user);
     }
-    
 }

@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    host: dev.tss.com
+    port: 5672
+    username: admin
+    password: njittss
+
+rabbitmq:
+  direct:
+    queue:
+      a: direct.queue.a
+      b: direct.queue.b
+    routingKey: direct.queue.test
+    exchangeName: directExchange

@@ -15,6 +15,7 @@ public class SingleApplicationTests {
     @Autowired
     private Producer producer;
 
+    // 发送字符串
     @Test
     public void testSendMsg() {
         for (int i = 0; i < 10; i++) {
@@ -23,11 +24,11 @@ public class SingleApplicationTests {
         }
     }
 
+    // 发送java Object
     @Test
     public void testSendUser() {
         for (int i = 0; i < 10; i++) {
             producer.sendUser(new User(Long.valueOf(i), "小明" + i));
         }
     }
-
 }
