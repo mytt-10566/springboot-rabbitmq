@@ -1,4 +1,4 @@
-package com.momo.springbootrabbitmq.single.po;
+package com.momo.springbootrabbitmq.default0.po;
 
 import java.io.Serializable;
 

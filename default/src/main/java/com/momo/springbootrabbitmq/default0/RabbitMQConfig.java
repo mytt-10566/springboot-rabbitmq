@@ -1,4 +1,4 @@
-package com.momo.springbootrabbitmq.single;
+package com.momo.springbootrabbitmq.default0;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +18,7 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queue.user}")
     private String userQueueName;
 
+    // 绑定到默认的交换器上（名称为空的Direct交换器），绑定键和队列名称相同
     @Bean
     public Queue createQueueMsg() {
         // true表示持久化消息

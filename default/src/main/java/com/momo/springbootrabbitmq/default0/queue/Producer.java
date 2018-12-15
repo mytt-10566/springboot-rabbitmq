@@ -1,6 +1,6 @@
-package com.momo.springbootrabbitmq.single.queue;
+package com.momo.springbootrabbitmq.default0.queue;
 
-import com.momo.springbootrabbitmq.single.po.User;
+import com.momo.springbootrabbitmq.default0.po.User;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

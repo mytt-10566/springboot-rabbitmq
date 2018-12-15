@@ -7,5 +7,5 @@ spring:
     
 rabbitmq: 
   queue:
-   msg: springboot.queue.msg
-   user: springboot.queue.user
+   msg: queue.msg
+   user: queue.user

@@ -1,4 +1,4 @@
-package com.momo.springbootrabbitmq.single;
+package com.momo.springbootrabbitmq.default0;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

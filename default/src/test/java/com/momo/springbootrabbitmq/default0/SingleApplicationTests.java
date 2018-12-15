@@ -1,7 +1,7 @@
-package com.momo.springbootrabbitmq.single;
+package com.momo.springbootrabbitmq.default0;
 
-import com.momo.springbootrabbitmq.single.po.User;
-import com.momo.springbootrabbitmq.single.queue.Producer;
+import com.momo.springbootrabbitmq.default0.po.User;
+import com.momo.springbootrabbitmq.default0.queue.Producer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

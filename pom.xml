@@ -21,7 +21,7 @@
 		<module>callback</module>
 		<module>direct</module>
 		<module>fanout</module>
-		<module>single</module>
+		<module>default</module>
 		<module>topic</module>
 	</modules>
 
