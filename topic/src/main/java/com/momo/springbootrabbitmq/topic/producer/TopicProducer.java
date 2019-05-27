@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TopicProducer {
 
-    @Value("${rabbitmq.topic.message.routingKey}")
+    @Value("${rabbitmq.topic.send.routingKey}")
     private String messageRoutingKey;
 
     @Value("${rabbitmq.topic.messages.routingKey}")
@@ -25,7 +25,7 @@ public class TopicProducer {
     private AmqpTemplate rabbitTemplate;
 
     public void send() {
-        // topic.queue.message、topic.queue.messages队列都可以收到消息
+        // topic.queue.send、topic.queue.messages队列都可以收到消息
         String msg1 = "msg 1";
         this.rabbitTemplate.convertAndSend(exchangeName, messageRoutingKey, msg1);
 

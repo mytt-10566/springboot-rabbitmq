@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.topic.message.queue}")
+    @Value("${rabbitmq.topic.send.queue}")
     private String topicMessageQueue;
 
-    @Value("${rabbitmq.topic.message.routingKey}")
+    @Value("${rabbitmq.topic.send.routingKey}")
     private String messageRoutingKey;
 
     @Value("${rabbitmq.topic.messages.queue}")
@@ -46,7 +46,7 @@ public class RabbitMQConfig {
     }
 
     /**
-     * 将队列topic.message与exchange绑定，binding_key为topic.message,就是完全匹配
+     * 将队列topic.message与exchange绑定，binding_key为topic.send,就是完全匹配
      *
      * @param queueMessage
      * @param exchange

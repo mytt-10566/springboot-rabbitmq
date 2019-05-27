@@ -23,7 +23,7 @@ public class DirectProducer {
     private AmqpTemplate rabbitTemplate;
 
     public void send() {
-        String msgString = "DirectSender: direct message";
+        String msgString = "DirectSender: direct send";
         this.rabbitTemplate.convertAndSend(exchangeName, routingKey, msgString);
     }
 }

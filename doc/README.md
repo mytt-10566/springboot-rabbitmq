@@ -83,7 +83,7 @@ channel.basicPublish(exchangeName, routingKey + "2", true, null, content2);
 // 正常路由的消息
 channel.basicPublish(exchangeName, routingKey, true, MessageProperties.TEXT_PLAIN, "Test Msg".getBytes("UTF-8"));
 
-// 正常路由的消息
+// 不可路由的消息
 channel.basicPublish(exchangeName, routingKey + "2", true, MessageProperties.TEXT_PLAIN, "Test Msg2".getBytes("UTF-8"));
 
 channel.addReturnListener(new ReturnListener() {
@@ -323,9 +323,48 @@ RPC处理流程如下：
 - RPC服务端监听RpcQueue队列中的请求，当请求到来时，服务端会处理并把带有结果的消息发送给客户端。接收的队列就是ReplyTo设定的回调队列。
 - 客户端监听回调队列，当有消息时，检查CorrelationId属性，如果与请求匹配，那就是结果了。
 
-### 8.1使用RabbitMQ封装好的RPC服务端和客户端
+#### 8.1使用RabbitMQ封装好的RPC服务端和客户端
 
 略
 
-### 8.2使用自定义RPC服务端和客户端
+#### 8.2使用自定义RPC服务端和客户端
 
+
+### 九、持久化
+
+持久化可以提高RabbitMQ的可靠性，以防在异常情况（重启、关闭、宕机等）下的数据丢失。
+RabbitMQ的持久化主要分为三个部分：交换器的持久化、队列的持久化和消息的持久化。
+
+- 交换器的持久化：通过在声明交换器时将durable参数设置为true实现的。
+如果交换器不设置持久化，那么在RabbitMQ服务重启之后，相关的交换器元数据会丢失，不过消息不会丢失，只是不能将消息发送到这个交换器了。
+对一个长期使用的交换器来说，建议将其设置为持久化。
+
+- 队列的持久化：通过在声明队列时将其设置为durable参数设置为true实现的。
+如果队列不设置持久化，那么在RabbitMQ服务重启之后，相关队列的元数据会丢失，此时数据也会丢失。
+队列都没有了，消息也就没地方存储了。
+
+- 消息的持久化：通过将消息饿投递模式（BasicProperties中的deliveryMode属性）设置为2即可实现消息的持久化。
+MessageProperties.PERSISTENT_TEXT_PLAIN封装了这个属性。
+
+设置了队列和消息的持久化，当RabbitMQ服务重启之后，消息依旧存在。
+单单只设置队列持久化，重启之后消息会丢失；单单只设置消息的持久化，重启之后队列会消失，继而消息也丢失。
+单单设置消息持久化而不设置队列的持久化显得毫无意义。
+
+> 将交换器、队列、消息都设置为持久化之后也不能百分之百保证数据不丢失。
+
+消息丢失的几种情况：
+- 消费端：如果订阅消费队列时将autoAck参数设置为true，那么当消费者接收到相关消息之后，还没来得及处理就宕机了，这样也算数据丢失。
+这种情况比较好解决，将autoAck设置为false，并进行手动确认。
+
+- 发送端：在持久化的消息存入RabbitMQ之后，还需要一段时间（虽然很短，但不可忽视）才能存入磁盘之中。
+RabbitMQ不会为每条消息都进行同步存盘（调用内核的fsync方法）的处理，可能仅仅保存到系统缓存之中而不是无力磁盘之中。
+如果在这段时间内RabbitMQ服务节点发生了宕机、重启等异常情况，消息保存还没来得及落盘，那么这些消息将会丢失。 处理方法：
+  - 引入RabbitMQ的镜像队列机制，相当于设置了副本，当主节点挂掉之后，可以自动切换到从节点。除非所有节点都挂掉，否则还是可以保证高可用性的。
+正式环境一般会配置镜像队列。
+  - 发送端引入事物机制或者发送方确认机制来保证消息已经正确发送并存存储至RabbitMQ中。
+  
+### 十、生产者确认
+
+#### 1.事物机制
+
+#### 2.发送方确认机制

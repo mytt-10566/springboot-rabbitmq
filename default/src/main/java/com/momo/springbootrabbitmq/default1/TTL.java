@@ -32,7 +32,7 @@ public class TTL {
         // 声明队列
         String queueName = "direct.queue.test.ttl2";
         Map<String, Object> arguments = new HashMap<>();
-        arguments.put("x-message-ttl", 5000);
+        arguments.put("x-send-ttl", 5000);
         String ttlQueue = channel.queueDeclare(queueName, true, false, false, arguments).getQueue();
         // 绑定交换器和队列
         String routingKey = "direct.routing-key.test.ttl2";

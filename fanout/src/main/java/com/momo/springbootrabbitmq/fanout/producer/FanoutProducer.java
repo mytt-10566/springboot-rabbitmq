@@ -24,7 +24,7 @@ public class FanoutProducer {
      * 扇形交换器不匹配routingKey
      * */
     public void send() {
-        String msgString = "FanoutSender: fanout message";
+        String msgString = "FanoutSender: fanout send";
         System.out.println(msgString);
         this.rabbitTemplate.convertAndSend(exchangeName, "", msgString);
     }

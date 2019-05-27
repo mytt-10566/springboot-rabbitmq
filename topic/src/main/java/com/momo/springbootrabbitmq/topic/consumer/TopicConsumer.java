@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TopicConsumer {
 
-    @RabbitListener(queues = "${rabbitmq.topic.message.queue}")
+    @RabbitListener(queues = "${rabbitmq.topic.send.queue}")
     public void receiveMsg(String msg) {
         System.out.println("c1 - " + msg);
     }

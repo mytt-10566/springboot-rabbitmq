@@ -9,8 +9,8 @@ rabbitmq:
  topic:
   exchangeName: topidExchange
   message:
-   queue: topic.queue.message
-   routingKey: topic.message
+   queue: topic.queue.send
+   routingKey: topic.send
   messages:
     queue: topic.queue.messages
     routingKey: topic.#

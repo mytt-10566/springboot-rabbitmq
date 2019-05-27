@@ -32,7 +32,7 @@ public class DLX {
         AMQP.Exchange.DeclareOk declareOk = channel.exchangeDeclare(exchangeName, "direct", true);
         // 声明队列
         Map<String, Object> arguments = new HashMap<>();
-        arguments.put("x-message-ttl", 5000);
+        arguments.put("x-send-ttl", 5000);
         arguments.put("x-dead-letter-exchange", dlxExchangeName);
         arguments.put("x-dead-letter-routing-key", dlxRoutingKey);
         String queue = channel.queueDeclare(queueName, true, false, false, arguments).getQueue();
